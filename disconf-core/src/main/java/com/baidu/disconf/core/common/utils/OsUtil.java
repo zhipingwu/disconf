@@ -217,6 +217,11 @@ public final class OsUtil {
                             logger.warn(e.toString());
                         }
                     }
+                    
+                    //这里如果不读取有可能在缓存，linux文件系统下，得不到对应的文件。
+                    if(org.apache.commons.io.FileUtils.readFileToString(dest).length() > 0){
+                        logger.info("get config file success : {}",dest.getName());
+                    }
                 }
 
                 // 进行重试
