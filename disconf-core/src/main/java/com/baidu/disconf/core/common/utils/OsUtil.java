@@ -197,7 +197,13 @@ public final class OsUtil {
                     logger.warn(e.toString());
 
                 } finally {
-
+                    if (outStream != null) {
+                        try {
+                            outStream.close();
+                        } catch (IOException e) {
+                            logger.warn(e.toString());
+                        }
+                    }
                     // 释放锁，通道；删除锁文件
                     if (null != lock) {
                         try {
@@ -210,13 +216,7 @@ public final class OsUtil {
                             lockFile.delete();
                         }
                     }
-                    if (outStream != null) {
-                        try {
-                            outStream.close();
-                        } catch (IOException e) {
-                            logger.warn(e.toString());
-                        }
-                    }
+
                 }
 
                 // 进行重试
