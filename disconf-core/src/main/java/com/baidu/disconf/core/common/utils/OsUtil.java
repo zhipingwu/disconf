@@ -217,6 +217,8 @@ public final class OsUtil {
                             logger.warn(e.toString());
                         }
                     }
+                    //这里如果不等待有可能在缓存，linux文件系统下，得不到对应的文件。
+                    Thread.sleep(500);
                 }
 
                 // 进行重试
